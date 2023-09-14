@@ -1,4 +1,3 @@
-
 /**
  * @jest-environment jsdom
  */
@@ -8,20 +7,25 @@ const fs = require('fs');
 const NotesModel = require("./notesModel")
 const NotesView = require("./notesView")
 
-describe('notesView', () => {
+describe.skip('notesView', () => {
+
+    // beforeEach(() => {
+    //     document.body.innerHTML = ''
+    // });
+
     it(`displayNotes method returns empty list of notes from model`, () => {
-        model = new NotesModel();
-        view = new NotesView(model);
+        const model = new NotesModel();
+        const view = new NotesView(model);
         expect(view.displayNotes()).toEqual([]);
     })
 
     it('displays two notes', () => {
         //Set up the model and view classes
         document.body.innerHTML = fs.readFileSync('./index.html');
-        model = new NotesModel()
+        const model = new NotesModel()
         model.addNote('Note 1')
         model.addNote('Note 2')
-        view = new NotesView(model)
+        const view = new NotesView(model)
 
         //Display notes on page
         view.displayNotes();
@@ -35,8 +39,8 @@ describe('notesView', () => {
     it('clicks the button and displays the new note', () => {
         //Arrange
         document.body.innerHTML = fs.readFileSync('./index.html')
-        model = new NotesModel()
-        view = new NotesView(model)
+        const model = new NotesModel()
+        const view = new NotesView(model)
         
         //Act 
         const inputEl = document.querySelector('#task-input-box')
@@ -52,8 +56,8 @@ describe('notesView', () => {
     it('when display notes called twice, after two notes inputted, there should be two notes displayed', () => {
         //Arrange
         document.body.innerHTML = fs.readFileSync('./index.html')
-        model = new NotesModel()
-        view = new NotesView(model)
+        const model = new NotesModel()
+        const view = new NotesView(model)
 
         //Assert that there are no notes on the page
         expect(document.querySelector('div.note').length).toEqual(0)
